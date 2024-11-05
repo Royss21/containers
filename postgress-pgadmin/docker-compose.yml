@@ -3,7 +3,7 @@ services:
   db:
     image: postgres:16
     container_name: postgress
-    restart: always
+    # restart: always
     ports:
       - "5432:5432"
     environment:
@@ -14,7 +14,7 @@ services:
   pgadmin:
     image: dpage/pgadmin4:8.10
     container_name: pgadmin
-    restart: always
+    # restart: always
     ports:
       - "8089:80"
     environment:
