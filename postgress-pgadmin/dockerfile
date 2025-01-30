@@ -1,0 +1,13 @@
+FROM postgres:16
+
+# Instalar paquetes necesarios, incluyendo git
+RUN apt-get update && apt-get install -y \
+    git \
+    postgresql-server-dev-16 \
+    build-essential \
+    && rm -rf /var/lib/apt/lists/*
+
+# Clonar y compilar pgvector
+RUN git clone https://github.com/pgvector/pgvector.git \
+    && cd pgvector \
+    && make && make install
