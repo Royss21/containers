@@ -1,0 +1,48 @@
+version: '3'
+
+services:
+  # Servicio de MySQL
+  mysql:
+    image: mysql:8.0
+    container_name: mysql_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword  # Contraseña del usuario root
+      MYSQL_DATABASE: mibasededatos      # Nombre de la base de datos inicial
+      MYSQL_USER: usuario                # Usuario adicional
+      MYSQL_PASSWORD: password           # Contraseña del usuario adicional
+    ports:
+      - "3306:3306"                      # Puerto expuesto: local:contenedor
+    volumes:
+      - mysql_data:/var/lib/mysql        # Volumen para persistir los datos
+    networks:
+      - mysql_network
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+
+  # Servicio de phpMyAdmin
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    restart: always
+    depends_on:
+      - mysql
+    environment:
+      PMA_HOST: mysql                    # Host al que se conecta (nombre del servicio)
+      PMA_PORT: 3306                     # Puerto de MySQL
+      MYSQL_ROOT_PASSWORD: rootpassword  # Contraseña de root (debe coincidir con la de MySQL)
+    ports:
+      - "8080:80"                        # Puerto expuesto: local:contenedor
+    networks:
+      - mysql_network
+
+# Volúmenes
+volumes:
+  mysql_data:
+    driver: local
+
+# Redes
+networks:
+  mysql_network:
+    driver: bridge

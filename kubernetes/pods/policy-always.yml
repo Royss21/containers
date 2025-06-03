@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-always
+  labels:
+    name: nginx-always
+spec:
+  containers:
+    - name: nginx-always
+      image: nginx:latest
+      ports:
+        - containerPort: 8080
+  restartPolicy: Always

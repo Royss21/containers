@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: myapp-annotation
+  labels:
+    name: myapp-annotation
+  annotations:
+    created-by: "user"
+    monitoring: "sssss"
+spec:
+  containers:
+  - name: myapp-annotation
+    image: nginx

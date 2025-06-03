@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-onfailure
+  labels:
+    name: nginx-onfailure
+spec: 
+  restartPolicy: OnFailure
+  containers:
+    - name: nginx-onfailure
+      image: nginx:latest
+      command: ["sh", "-c", " echo Ejemplo de pod fallado && exit 1"]
+  
