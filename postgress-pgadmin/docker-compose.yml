@@ -1,21 +1,21 @@
 version: "3.8"
 services:
   db:
-    # image: postgres:16
-    build:
-      context: .
-      dockerfile: dockerfile
+    image: postgres:16.10-alpine3.22
+    # build:
+    #   context: .
+    #   dockerfile: dockerfile
     container_name: postgress
     # restart: always
     ports:
       - "5432:5432"
     environment:
-      POSTGRES_USER: rmartel
-      POSTGRES_PASSWORD: Tobirama19++
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
     volumes:
       - local_pgdata:/var/lib/postgresql/data
     networks:
-      - postgres_red
+      - shared_network
   pgadmin:
     image: dpage/pgadmin4:8.10
     container_name: pgadmin
@@ -23,17 +23,18 @@ services:
     ports:
       - "8089:80"
     environment:
-      PGADMIN_DEFAULT_EMAIL: rmartel@local.com
-      PGADMIN_DEFAULT_PASSWORD: Tobirama19++
+      PGADMIN_DEFAULT_EMAIL: admin@local.com
+      PGADMIN_DEFAULT_PASSWORD: admin
     volumes:
       - pgadmin-data:/var/lib/pgadmin
     networks:
-      - postgres_red
-
-networks:
-  postgres_red:
-    driver: bridge
+      - shared_network
 
 volumes:
   local_pgdata:
   pgadmin-data:
+
+networks:
+  shared_network:
+    external: true
+

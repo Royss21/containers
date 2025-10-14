@@ -1,17 +1,17 @@
 services:
   # Servicio de MySQL
-  mysql:
+  mysql8_db:
     image: mysql:8.0
-    container_name: mysql_db
+    container_name: mysql8_db
     environment:
       MYSQL_ROOT_PASSWORD: root_password_123 # Contraseña del usuario root
       MYSQL_DATABASE: mi_database # Nombre de la base de datos inicial
       MYSQL_USER: mi_usuario # Usuario adicional
       MYSQL_PASSWORD: mi_password # Contraseña del usuario adicional
     ports:
-      - "3306:3306" # Puerto expuesto: local:contenedor
+      - "3307:3306" # Puerto expuesto: local:contenedor
     volumes:
-      - mysql_data:/var/lib/mysql # Volumen para persistir los datos
+      - mysql_data_v8:/var/lib/mysql # Volumen para persistir los datos
     networks:
       - shared_network
     command:
@@ -20,7 +20,7 @@ services:
 
 # Volúmenes
 volumes:
-  mysql_data:
+  mysql_data_v8:
     driver: local
 
 # Redes

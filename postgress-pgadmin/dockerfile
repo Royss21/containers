@@ -8,6 +8,6 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Clonar y compilar pgvector
-RUN git clone https://github.com/pgvector/pgvector.git \
-    && cd pgvector \
-    && make && make install
+# RUN git clone https://github.com/pgvector/pgvector.git \
+#     && cd pgvector \
+#     && make && make install
