@@ -15,3 +15,7 @@ services:
 
 volumes:
   local_rabbitmq:
+   
+networks:
+  shared_network:
+    external: true
